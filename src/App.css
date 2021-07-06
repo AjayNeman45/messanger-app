@@ -6,12 +6,13 @@ p {
   font-weight: 500;
   font-size: 16px;
   margin:10px 10px;
+  user-select:none;
   
 }
 .mainDiv{
+  background-color:rgb(233, 248, 233);
   width:50vw;
-  margin: 0 auto;
-
+  margin:0 auto;
 }
 .msg {
   display: flex;
@@ -21,6 +22,7 @@ p {
   align-items: center;
   width:fit-content;
   max-width:40vw;
+  position: relative;
 }
 
 .sent {
@@ -28,17 +30,52 @@ p {
   color: white;
   border-radius: 100px 100px 0 100px;
   flex-direction: row-reverse;
-  /* padding: 20px 20px 0 10px; */
   float: right;
 }
-.userPhoto{
-  display: none;
+.sent span{
+  font-size: 13px;
+  position: absolute;
+  bottom: -0.5rem;
+  right:-0.3rem;
+  border:1px solid;
+  background-color: white;
+  width:18px;
+  height:19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius:50%;
+  user-select:none;
 }
-.received {
-  border: 1px solid lightgray;
+.recieved {
   background-color: #FAFAFA;
   border-radius: 100px 100px 100px 0;
   float: left;
+}
+.recieved span{
+  font-size: 13px;
+  position: absolute;
+  bottom: -0.5rem;
+  left:-0.3rem;
+  border:1px solid;
+  background-color: white;
+  width:18px;
+  height:19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius:50%;
+  user-select:none;
+}
+
+.showLike{
+  color:red;
+}
+.hideLike{
+ color:rgb(228, 228, 228);
+}
+.userPhoto{
+  display: none
 }
 .guestPhoto{
   border-radius: 50%;
@@ -46,6 +83,11 @@ p {
   margin-top:30px;
   margin-left:10px;
   float: left;
+}
+.msgs {
+  margin: 70px 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .sendMsg {
@@ -61,11 +103,7 @@ p {
   background-color: #fafafa;
 }
 
-.msgs {
-  margin: 70px 0;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .signOutDiv{
   display: flex;

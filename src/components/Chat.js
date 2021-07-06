@@ -5,7 +5,7 @@ import SignOut from './SignOut'
 
 const Chat = forwardRef((ref) =>
 {
-    console.log(auth);
+    // console.log(auth);
     const scroll = useRef()
     const [messages, setMessages] = useState([])
     useEffect(() =>
@@ -15,19 +15,31 @@ const Chat = forwardRef((ref) =>
             setMessages(snapshot.docs.map(doc => doc.data()))
         })
     }, [])
+
+    var show = false;
+    const giveLike = (e) =>
+    {
+        console.log(e);  
+        show = !show;
+        e.target.className = show ? 'showLike' : 'hideLike';
+    }
+    const deleteMsg = (e) =>{
+        e.target.style.display = "none";
+    }
     return (
         <div className="mainDiv">
             <SignOut />
-                <div className="msgs">
-                    {messages.map(({ id, text, photoURL, uid }) => (
-                        <div>
-                            <img src={photoURL} alt="" className={uid === auth.currentUser.uid ? 'userPhoto' : 'guestPhoto'} />
-                            <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
-                                <p>{text}</p>
-                            </div>
+            <div className="msgs">
+                {messages.map(({ id, text, photoURL, uid }) => (
+                    <div>
+                        <img src={photoURL} alt="" className={uid === auth.currentUser.uid ? 'userPhoto' : 'guestPhoto'} />
+                        <div onClick={deleteMsg} key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'recieved'}`}>
+                            <p>{text}</p>
+                            <span onClick={giveLike} className="hideLike">❤️</span>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
+            </div>
             <SendMessage scroll={scroll} />
             <div ref={scroll}></div>
         </div>
