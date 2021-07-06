@@ -33,7 +33,7 @@ const Chat = forwardRef((ref) =>
                 {messages.map(({ id, text, photoURL, uid }) => (
                     <div>
                         <img src={photoURL} alt="" className={uid === auth.currentUser.uid ? 'userPhoto' : 'guestPhoto'} />
-                        <div onClick={deleteMsg} key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'recieved'}`}>
+                        <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'recieved'}`}>
                             <p>{text}</p>
                             <span onClick={giveLike} className="hideLike">❤️</span>
                         </div>
