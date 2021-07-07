@@ -4,7 +4,7 @@ import firebase from 'firebase'
 import { Input, Button } from '@material-ui/core'
 
 
-function SendMessage({ scroll })
+function SendMessage({ scroll ,showLike})
 {
     const [msg, setMsg] = useState('')
 
@@ -17,6 +17,7 @@ function SendMessage({ scroll })
                 text: msg,
                 photoURL,
                 uid,
+                showLike,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             })
         }

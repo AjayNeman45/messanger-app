@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, forwardRef } from 'react'
 import { db, auth } from '../firebase'
 import SendMessage from './SendMessage'
 import SignOut from './SignOut'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 const Chat = forwardRef((ref) =>
 {
@@ -16,14 +17,20 @@ const Chat = forwardRef((ref) =>
         })
     }, [])
 
-    var show = false;
+    var showLike = false;
     const giveLike = (e) =>
     {
-        console.log(e);  
-        show = !show;
-        e.target.className = show ? 'showLike' : 'hideLike';
+        if (!showLike) {
+            e.target.style.color = "red"
+            showLike = true;
+        }
+        else {
+            e.target.style.color = "rgb(214, 214, 214)";
+            showLike = false;
+        }
     }
-    const deleteMsg = (e) =>{
+    const deleteMsg = (e) =>
+    {
         e.target.style.display = "none";
     }
     return (
@@ -35,12 +42,13 @@ const Chat = forwardRef((ref) =>
                         <img src={photoURL} alt="" className={uid === auth.currentUser.uid ? 'userPhoto' : 'guestPhoto'} />
                         <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'recieved'}`}>
                             <p>{text}</p>
-                            <span onClick={giveLike} className="hideLike">❤️</span>
+                            <span style={showLike ? { color: 'red' } : { color: 'rgb(214, 214, 214)' }} onClick={giveLike}> <FavoriteIcon /> </span>
                         </div>
                     </div>
                 ))}
             </div>
-            <SendMessage scroll={scroll} />
+
+            <SendMessage scroll={scroll}/>
             <div ref={scroll}></div>
         </div>
     )
